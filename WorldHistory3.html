@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World History Honors Quiz</title>
+    <style>
+        /* Updated CSS for button-like answers */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+
+        #quiz-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #question-container {
+            margin-top: 20px;
+        }
+
+        .choice-button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .choice-button:hover {
+            background: #0056b3;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-left: 5px solid #ccc;
+        }
+
+        #next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+
+        #next-button:disabled {
+            background: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz-container">
+        <h1>World History Honors: Early Modern Era Quiz</h1>
+        <div id="question-container"></div>
+        <button id="next-button">Next Question</button>
+        <div id="feedback"></div>
+    </div>
+    <script>
+        // Updated JavaScript for button-like answers
+        const questions = [
+            {
+                question: "What was the main goal of the Treaty of Tordesillas?",
+                choices: [
+                    "To divide trade routes between Spain and Portugal",
+                    "To end religious conflicts in Europe",
+                    "To regulate the colonization of Asia",
+                    "To abolish slavery in the Americas"
+                ],
+                correctAnswer: 0,
+                explanation: "The Treaty of Tordesillas (1494) divided newly discovered lands outside Europe between Spain and Portugal along a meridian line."
+            },
+            {
+                question: "Which of the following is NOT a characteristic of Renaissance art?",
+                choices: [
+                    "Use of perspective",
+                    "Emphasis on religious themes",
+                    "Depictions of everyday life",
+                    "Lack of anatomical accuracy"
+                ],
+                correctAnswer: 3,
+                explanation: "Renaissance art is known for its anatomical accuracy and realistic portrayal of human figures, a stark contrast to earlier art periods."
+            },
+            {
+    question: "What was the primary purpose of the Age of Exploration?",
+    choices: [
+        "To discover new continents",
+        "To establish trade routes to Asia",
+        "To spread democracy worldwide",
+        "To end conflicts in Europe"
+    ],
+    correctAnswer: 1,
+    explanation: "The primary purpose of the Age of Exploration was to find new trade routes to Asia, especially for spices and luxury goods."
+},
+{
+    question: "Which empire was known as the 'Gunpowder Empire' due to its military technology?",
+    choices: [
+        "The Ottoman Empire",
+        "The Mongol Empire",
+        "The Roman Empire",
+        "The Ming Dynasty"
+    ],
+    correctAnswer: 0,
+    explanation: "The Ottoman Empire utilized gunpowder technology in cannons and muskets, revolutionizing its military dominance."
+},
+{
+    question: "What was Martin Luther's primary objection to the Catholic Church?",
+    choices: [
+        "The authority of the Pope",
+        "The sale of indulgences",
+        "The use of Latin in services",
+        "The role of priests in education"
+    ],
+    correctAnswer: 1,
+    explanation: "Martin Luther's 95 Theses criticized the Catholic Church, particularly the sale of indulgences as a way to reduce punishment for sins."
+},
+{
+    question: "What caused the fall of the Aztec Empire?",
+    choices: [
+        "A famine in Tenochtitlan",
+        "Invasion by Spanish forces",
+        "The rise of the Inca Empire",
+        "Internal civil wars"
+    ],
+    correctAnswer: 1,
+    explanation: "The Spanish forces, led by Hernán Cortés, caused the fall of the Aztec Empire through military conquest and alliances with native enemies."
+},
+{
+    question: "Which economic system emerged as a result of European colonization?",
+    choices: [
+        "Mercantilism",
+        "Capitalism",
+        "Feudalism",
+        "Socialism"
+    ],
+    correctAnswer: 0,
+    explanation: "Mercantilism emphasized the accumulation of wealth through trade and colonization to benefit European states."
+},
+{
+    question: "What sparked the Protestant Reformation?",
+    choices: [
+        "The printing press",
+        "The Black Death",
+        "The Treaty of Westphalia",
+        "The collapse of feudalism"
+    ],
+    correctAnswer: 0,
+    explanation: "The printing press allowed Martin Luther's ideas to spread quickly across Europe, sparking the Protestant Reformation."
+},
+{
+    question: "What was the role of sugar plantations in the transatlantic slave trade?",
+    choices: [
+        "They required a large labor force",
+        "They promoted religious conversions",
+        "They led to agricultural innovations",
+        "They created trade routes to Asia"
+    ],
+    correctAnswer: 0,
+    explanation: "Sugar plantations required a large labor force, which fueled the demand for enslaved Africans in the Americas."
+},
+{
+    question: "Which empire built the Taj Mahal as a symbol of love?",
+    choices: [
+        "The Mughal Empire",
+        "The Ottoman Empire",
+        "The Safavid Empire",
+        "The Byzantine Empire"
+    ],
+    correctAnswer: 0,
+    explanation: "The Mughal Emperor Shah Jahan commissioned the Taj Mahal as a mausoleum for his wife, Mumtaz Mahal."
+},
+{
+    question: "What was the main goal of the Scientific Revolution?",
+    choices: [
+        "To challenge religious authority",
+        "To advance human understanding through observation",
+        "To promote democratic governments",
+        "To expand European empires"
+    ],
+    correctAnswer: 1,
+    explanation: "The Scientific Revolution emphasized observation, experimentation, and evidence-based conclusions to expand human knowledge."
+},
+{
+    question: "Who proposed the heliocentric model of the universe?",
+    choices: [
+        "Galileo Galilei",
+        "Nicolaus Copernicus",
+        "Isaac Newton",
+        "Johannes Kepler"
+    ],
+    correctAnswer: 1,
+    explanation: "Nicolaus Copernicus proposed the heliocentric model, stating that the Sun, not Earth, was at the center of the universe."
+},
+{
+    question: "What did the Treaty of Westphalia accomplish?",
+    choices: [
+        "It ended the Thirty Years' War",
+        "It united the Holy Roman Empire",
+        "It divided Africa among European powers",
+        "It began the Age of Exploration"
+    ],
+    correctAnswer: 0,
+    explanation: "The Treaty of Westphalia ended the Thirty Years' War and established the concept of sovereign states."
+},
+{
+    question: "What was the major economic impact of the Columbian Exchange?",
+    choices: [
+        "Increased trade in luxury goods",
+        "The introduction of new crops and livestock",
+        "The elimination of feudalism",
+        "The establishment of global free trade"
+    ],
+    correctAnswer: 1,
+    explanation: "The Columbian Exchange introduced new crops like potatoes and corn, as well as livestock, transforming economies worldwide."
+},
+{
+    question: "Who was the ruler of the Ottoman Empire during its height?",
+    choices: [
+        "Suleiman the Magnificent",
+        "Akbar the Great",
+        "Ivan the Terrible",
+        "Peter the Great"
+    ],
+    correctAnswer: 0,
+    explanation: "Suleiman the Magnificent expanded the Ottoman Empire, establishing its golden age during the 16th century."
+},
+{
+    question: "What was the Enlightenment's primary focus?",
+    choices: [
+        "Religious revival",
+        "Scientific observation",
+        "Reason and individual rights",
+        "Colonial expansion"
+    ],
+    correctAnswer: 2,
+    explanation: "The Enlightenment emphasized reason, liberty, and individual rights, influencing political and social reforms worldwide."
+},
+{
+    question: "What advantage did the Spanish have over indigenous civilizations in the Americas?",
+    choices: [
+        "Greater population",
+        "Superior weaponry and horses",
+        "Knowledge of the terrain",
+        "Support from other empires"
+    ],
+    correctAnswer: 1,
+    explanation: "Spanish forces used superior weaponry, steel armor, and horses, as well as diseases, to conquer indigenous civilizations."
+},
+{
+    question: "Which European power colonized Brazil?",
+    choices: [
+        "Spain",
+        "Portugal",
+        "France",
+        "England"
+    ],
+    correctAnswer: 1,
+    explanation: "Portugal colonized Brazil and established a plantation-based economy that relied heavily on enslaved African labor."
+},
+{
+    question: "What was the goal of mercantilism?",
+    choices: [
+        "To promote free trade",
+        "To accumulate wealth through exports",
+        "To create alliances between nations",
+        "To spread democracy"
+    ],
+    correctAnswer: 1,
+    explanation: "Mercantilism aimed to increase a nation's wealth by exporting goods and limiting imports to accumulate precious metals."
+},
+{
+    question: "What were indulgences in the Catholic Church?",
+    choices: [
+        "Documents forgiving sins in exchange for money",
+        "Religious ceremonies for the dead",
+        "Blessings for the poor",
+        "Prayers for salvation"
+    ],
+    correctAnswer: 0,
+    explanation: "Indulgences were payments to the Church that promised to reduce punishment for sins, sparking Martin Luther's criticism."
+},
+{
+    question: "What did the Glorious Revolution achieve in England?",
+    choices: [
+        "It restored absolute monarchy",
+        "It established a constitutional monarchy",
+        "It ended the slave trade",
+        "It initiated the Industrial Revolution"
+    ],
+    correctAnswer: 1,
+    explanation: "The Glorious Revolution in 1688 established a constitutional monarchy under William and Mary, limiting the powers of the monarchy."
+},
+{
+    question: "Which explorer was the first to circumnavigate the globe?",
+    choices: [
+        "Christopher Columbus",
+        "Vasco da Gama",
+        "Ferdinand Magellan",
+        "Hernán Cortés"
+    ],
+    correctAnswer: 2,
+    explanation: "Ferdinand Magellan's expedition was the first to circumnavigate the globe, though he died before its completion."
+},
+{
+    question: "What role did African kingdoms play in the Atlantic slave trade?",
+    choices: [
+        "They actively resisted the trade",
+        "They were intermediaries in the trade",
+        "They colonized American territories",
+        "They abolished slavery within Africa"
+    ],
+    correctAnswer: 1,
+    explanation: "African kingdoms often acted as intermediaries, capturing and selling slaves to European traders in exchange for goods."
+},
+{
+    question: "What was the significance of the printing press?",
+    choices: [
+        "It spread Renaissance and Reformation ideas",
+        "It enabled faster shipbuilding",
+        "It strengthened monarchies",
+        "It increased church authority"
+    ],
+    correctAnswer: 0,
+    explanation: "The printing press spread Renaissance and Reformation ideas by making books and pamphlets widely accessible."
+},
+{
+    question: "Who led the Protestant Reformation?",
+    choices: [
+        "Martin Luther",
+        "John Calvin",
+        "Henry VIII",
+        "Thomas Aquinas"
+    ],
+    correctAnswer: 0,
+    explanation: "Martin Luther led the Protestant Reformation, challenging Catholic doctrines and promoting new Christian denominations."
+}
+
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const questionContainer = document.getElementById("question-container");
+        const feedbackContainer = document.getElementById("feedback");
+        const nextButton = document.getElementById("next-button");
+
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            questionContainer.innerHTML = `
+                <h2>${question.question}</h2>
+                ${question.choices.map((choice, index) => `
+                    <button class="choice-button" data-choice="${index}">${choice}</button>
+                `).join('')}
+            `;
+            feedbackContainer.innerHTML = "";
+            nextButton.style.display = "none";
+
+            const choiceButtons = document.querySelectorAll(".choice-button");
+            choiceButtons.forEach(button => {
+                button.addEventListener("click", (e) => {
+                    const userAnswer = parseInt(e.target.getAttribute("data-choice"));
+                    checkAnswer(userAnswer);
+                });
+            });
+        }
+
+        function checkAnswer(userAnswer) {
+            const question = questions[currentQuestion];
+            const isCorrect = userAnswer === question.correctAnswer;
+            feedbackContainer.innerHTML = `
+                <p>${isCorrect ? "Correct!" : "Incorrect."}</p>
+                <p>${isCorrect ? "" : `The correct answer is: ${question.choices[question.correctAnswer]}`}</p>
+                <p>${question.explanation}</p>
+            `;
+            if (isCorrect) score++;
+            nextButton.style.display = "block";
+
+            // Disable buttons after selecting an answer
+            const choiceButtons = document.querySelectorAll(".choice-button");
+            choiceButtons.forEach(button => button.disabled = true);
+        }
+
+        nextButton.addEventListener("click", () => {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                questionContainer.innerHTML = `
+                    <h2>Quiz Complete!</h2>
+                    <p>Your Score: ${score} / ${questions.length}</p>
+                `;
+                nextButton.style.display = "none";
+            }
+        });
+
+        // Load the first question on startup
+        loadQuestion();
+    </script>
+</body>
+</html>
